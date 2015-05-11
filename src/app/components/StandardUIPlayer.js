@@ -24,11 +24,8 @@ var StandardUIPlayer = React.createClass({
 
   componentDidMount: function(){
 
-    //var url = this.props.url;
     var soundInPlayer = this.props.sound;
 
-    //this.setState({soundObject: sound});
-    // make sound
   },
   componentWillUnmount: function(){
   },
