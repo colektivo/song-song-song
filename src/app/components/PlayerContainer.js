@@ -1,12 +1,9 @@
 var React = require('react');
 var StandardUIPlayer = require('./StandardUIPlayer');
 
-
 var PlayerContainer = React.createClass({
   
-  
-  getInitialState: function() {
-
+  componentWillMount: function(){
     // this is the way that I found to be able to update the component from the sound object callback
     var updatePlay = function(){this.update()}.bind(this);
 
@@ -107,15 +104,21 @@ var PlayerContainer = React.createClass({
       }
       
     });
+    
+  },
+
+  componentDidMount: function() {
+    this.node = this.props.sound;
+  },
+
+  getInitialState: function() {
     return {sound: this.props.sound};
   },
+  
   update: function() {
-    //console.log('playState:' +this.props.sound.playState);
-    //console.log('position:' + this.props.sound.position);
-    //console.log('duration:' + this.props.sound.duration);
-    //console.log('paused:' + this.props.sound.paused);
     this.setState({ sound: this.props.sound});
   },
+  
   render: function(){
     return (
       /*jshint ignore:start */
