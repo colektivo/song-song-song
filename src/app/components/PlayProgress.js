@@ -13,7 +13,12 @@ var PlayProgress = React.createClass({
         <div className="sm2-row">
           <TimeElapsed position={this.props.position} />
           <div className="sm2-progress-bd">
-            <ProgressTrack position={this.props.position} duration={this.props.duration} sound={this.props.sound} />
+            <ProgressTrack 
+                grabbingOn={this.props.grabbingOn} 
+                grabbingOff={this.props.grabbingOff} 
+                position={this.props.position} 
+                duration={this.props.duration} 
+                sound={this.props.sound} />
           </div>
           <PlayDuration duration={this.props.duration} />
         </div>
