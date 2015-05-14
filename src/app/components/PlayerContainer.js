@@ -6,6 +6,7 @@ var PlayerContainer = React.createClass({
   componentWillMount: function(){
     // this is the way that I found to be able to update the component from the sound object callback
     var updatePlay = function(){this.update()}.bind(this);
+    var onFinish = function(){this.finish()}.bind(this);
 
     // try to catch the events when load
     this.props.sound.load({
@@ -100,7 +101,7 @@ var PlayerContainer = React.createClass({
       },
 
       onfinish: function() {
-        updatePlay();
+        onFinish();
       }
       
     });
@@ -114,6 +115,14 @@ var PlayerContainer = React.createClass({
   getInitialState: function() {
     return {sound: this.props.sound};
   },
+
+  finish: function() {
+    this.refs.player.setState({ playing: false});
+    
+    //utils.css.remove(dom.o, 'playing');
+    //dom.progress.style.left = '0%';
+    
+  },
   
   update: function() {
     this.setState({ sound: this.props.sound});
@@ -122,7 +131,7 @@ var PlayerContainer = React.createClass({
   render: function(){
     return (
       /*jshint ignore:start */
-      <StandardUIPlayer sound={this.state.sound} 
+      <StandardUIPlayer ref='player' sound={this.state.sound} 
           update={this.update} author={this.props.author} songName={this.props.songName} fullWidth={this.props.fullWidth} />
       /*jshint ignore:end */
     );
