@@ -3,9 +3,11 @@ var StandardUIPlayer = require('./StandardUIPlayer');
 
 var PlayerContainer = React.createClass({
   
-  componentWillMount: function(){
-    // this is the way that I found to be able to update the component from the sound object callback
+  bindToEvents: function(){
+
+    // update on current position
     var updatePlay = function(){this.update()}.bind(this);
+
     var onFinish = function(){this.finish()}.bind(this);
 
     // try to catch the events when load
@@ -107,6 +109,13 @@ var PlayerContainer = React.createClass({
     });
     
   },
+  
+  componentWillMount: function(){
+
+    // this is the way that I found to be able to update the component from the sound object callback
+    this.bindToEvents();
+    
+  },
 
   componentDidMount: function() {
     this.node = this.props.sound;
@@ -117,8 +126,12 @@ var PlayerContainer = React.createClass({
   },
 
   finish: function() {
+
     this.refs.player.setState({ playing: false});
-    
+
+    // after finishing the events attached are gone, we need to attach them again
+    this.bindToEvents();
+
     //utils.css.remove(dom.o, 'playing');
     //dom.progress.style.left = '0%';
     
