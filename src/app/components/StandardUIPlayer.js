@@ -38,7 +38,6 @@ var StandardUIPlayer = React.createClass({
     }); 
   },
   handleClick: function(e){
-    
     this.props.sound.togglePause();
     this.setState({
       playing: !this.props.sound.paused
@@ -57,7 +56,13 @@ var StandardUIPlayer = React.createClass({
           <PlayerTexture sound={this.props.sound} update={this.update} />
           <PlayerGradient sound={this.props.sound} update={this.update}  />
           <PlayButton handleClick={this.handleClick} sound={this.props.sound} />
-          <PlayInlineStatus grabbingOn={this.handleMouseDown} grabbingOff={this.handleMouseUp} songName={this.props.songName} author={this.props.author} sound={this.props.sound} position={this.props.sound.position} duration={this.props.sound.durationEstimate} />
+          <PlayInlineStatus grabbingOn={this.handleMouseDown} 
+                            grabbingOff={this.handleMouseUp} 
+                            songName={this.props.songName} 
+                            author={this.props.author} 
+                            sound={this.props.sound} 
+                            position={this.props.sound.position} 
+                            duration={this.props.sound.durationEstimate} />
           <PlayVolume sound={this.props.sound} update={this.update} />
           <PlayMenu sound={this.props.sound} update={this.update} />
         </div>
