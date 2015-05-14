@@ -21,8 +21,22 @@ var ProgressTrack = React.createClass({
       e.preventDefault();
     }
 
+    this.props.grabbingOff();
+
     window.removeEventListener('mouseup', this.handleRelease);
 
+  },
+
+  //
+  // This avoid to seek before start playing
+  //
+  canSeek: function(){
+    return (
+      this.props.sound && this.props.sound.duration && (
+        (this.props.sound.playState != 0 && !this.props.sound.paused) || 
+          this.props.sound.paused
+        )
+      );
   },
 
   handleMouse: function(e){
@@ -36,7 +50,7 @@ var ProgressTrack = React.createClass({
     x = (e.clientX - barX);
     newPosition = (x / barWidth);
 
-    if (this.props.sound && this.props.sound.duration) {
+    if (this.canSeek()) {
       this.props.sound.setPosition(this.props.sound.duration * newPosition);
       // a little hackish: ensure UI updates immediately with current position, even if audio is buffering and hasn't moved there yet.
       this.props.sound._iO.whileplaying.apply(this.props.sound);
@@ -48,10 +62,12 @@ var ProgressTrack = React.createClass({
     
   },
 
-  handleClick: function(e){
+  handleMouseDown: function(e){
 
     window.addEventListener('mousemove', this.handleMouse);
     window.addEventListener('mouseup', this.handleRelease);
+
+    this.props.grabbingOn();
 
     return this.handleMouse(e);
 
@@ -64,7 +80,7 @@ var ProgressTrack = React.createClass({
     return (
       
       /*jshint ignore:start */
-      <div ref='progressTrack' className={classes} onMouseDown={this.handleClick} >
+      <div ref='progressTrack' className={classes} onMouseDown={this.handleMouseDown} >
         <ProgressBar  position={this.props.position} duration={this.props.duration} />
         <ProgressBall ref='progressBall' position={this.props.position} duration={this.props.duration} />
       </div>
