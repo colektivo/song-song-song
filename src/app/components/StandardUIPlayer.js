@@ -16,42 +16,48 @@ var StandardUIPlayer = React.createClass({
 
 
   getInitialState: function() {
-    return {grabbing: false};
+    return {
+      grabbing: false,
+      playing: 0
+    };
   },
   componentWillMount: function() {
-    
   },
-
   componentDidMount: function(){
-
-    var soundInPlayer = this.props.sound;
-
   },
   componentWillUnmount: function(){
   },
   update: function(){
-    this.setState({updated:true});
   },
   handleMouseDown: function(e){
     this.setState({grabbing:true}); 
   },
   handleMouseUp: function(e){
-    this.setState({grabbing:false}); 
+    this.setState({
+      grabbing: false
+    }); 
+  },
+  handleClick: function(e){
+    
+    this.props.sound.togglePause();
+    this.setState({
+      playing: !this.props.sound.paused
+    }); 
   },
   render: function(){
     var classes = classNames('sm2-bar-ui',
-    {'full-width': this.props.fullWidth},
-    {playing: this.props.sound.playState},
-    {grabbing: this.state.grabbing},
-    {paused: !this.props.sound.playState})
+    {'full-width': this.props.fullWidth },
+    {playing: this.state.playing },
+    {grabbing: this.state.grabbing },
+    {paused: !this.state.playing })
     return (
       /*jshint ignore:start */
       <div className={classes}>
-        <div className="sm2-main-controls" onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>
+        <div className="sm2-main-controls">
           <PlayerTexture sound={this.props.sound} update={this.update} />
           <PlayerGradient sound={this.props.sound} update={this.update}  />
-          <PlayButton sound={this.props.sound} update={this.update} />
-          <PlayInlineStatus update={this.update} songName={this.props.songName} author={this.props.author} sound={this.props.sound} position={this.props.sound.position} duration={this.props.sound.durationEstimate} />
+          <PlayButton handleClick={this.handleClick} sound={this.props.sound} />
+          <PlayInlineStatus grabbingOn={this.handleMouseDown} grabbingOff={this.handleMouseUp} songName={this.props.songName} author={this.props.author} sound={this.props.sound} position={this.props.sound.position} duration={this.props.sound.durationEstimate} />
           <PlayVolume sound={this.props.sound} update={this.update} />
           <PlayMenu sound={this.props.sound} update={this.update} />
         </div>
