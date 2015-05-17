@@ -17,16 +17,6 @@ var PlayerContainer = React.createClass({
         updatePlay();
       },
 
-      onbufferchange: function(isBuffering) {
-        if (isBuffering) {
-          console.log("onbufferchange isBuffering");
-          // utils.css.add(dom.o, 'buffering');
-        } else {
-          console.log("onbufferchange");
-          // utils.css.remove(dom.o, 'buffering');
-        }
-      },
-
       onplay: function() {
         updatePlay();
       },
