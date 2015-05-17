@@ -14,7 +14,6 @@ var classNames = require('classnames');
 
 var StandardUIPlayer = React.createClass({
 
-
   getInitialState: function() {
     return {
       grabbing: false,
