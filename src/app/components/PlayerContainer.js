@@ -107,10 +107,6 @@ var PlayerContainer = React.createClass({
     
   },
 
-  componentDidMount: function() {
-    this.node = this.props.sound;
-  },
-
   getInitialState: function() {
     return {sound: this.props.sound};
   },
@@ -122,9 +118,6 @@ var PlayerContainer = React.createClass({
     // after finishing the events attached are gone, we need to attach them again
     this.bindToEvents();
 
-    //utils.css.remove(dom.o, 'playing');
-    //dom.progress.style.left = '0%';
-    
   },
   
   update: function() {
