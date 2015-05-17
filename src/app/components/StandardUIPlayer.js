@@ -16,8 +16,7 @@ var StandardUIPlayer = React.createClass({
 
   getInitialState: function() {
     return {
-      grabbing: false,
-      playing: 0
+      grabbing: false
     };
   },
   componentWillMount: function() {
@@ -25,8 +24,6 @@ var StandardUIPlayer = React.createClass({
   componentDidMount: function(){
   },
   componentWillUnmount: function(){
-  },
-  update: function(){
   },
   handleMouseDown: function(e){
     this.setState({grabbing:true}); 
@@ -38,16 +35,15 @@ var StandardUIPlayer = React.createClass({
   },
   handleClick: function(e){
     this.props.sound.togglePause();
-    this.setState({
-      playing: !this.props.sound.paused
-    }); 
   },
   render: function(){
+    var playing = (this.props.sound.playState == 0) ? false : !this.props.sound.paused;
     var classes = classNames('sm2-bar-ui',
     {'full-width': this.props.fullWidth },
-    {playing: this.state.playing },
+    {playing: playing },
     {grabbing: this.state.grabbing },
-    {paused: !this.state.playing })
+    {buffering: this.props.sound.isBuffering },
+    {paused: !playing })
     return (
       /*jshint ignore:start */
       <div className={classes}>
