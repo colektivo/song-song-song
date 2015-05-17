@@ -1,4 +1,21 @@
 var utils = {
+  
+  style: function(node, styleProp) {
+    var value;
+
+    if (node.currentStyle) {
+
+      value = node.currentStyle[styleProp];
+
+    } else if (window.getComputedStyle) {
+
+      value = document.defaultView.getComputedStyle(node, null).getPropertyValue(styleProp);
+
+    }
+
+    return value;
+    
+  },
 
   position: (function() {
 
