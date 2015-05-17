@@ -85,4 +85,6 @@ soundManager.onready(function(){
 * Playlist is not a playlist (rename it)
 * Refactor song metadata in one object.
 * Implement onError
+* Implement onLoad
+* Implement whileloading for flash player
 
