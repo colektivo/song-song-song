@@ -48,8 +48,8 @@ var StandardUIPlayer = React.createClass({
       /*jshint ignore:start */
       <div className={classes}>
         <div className="sm2-main-controls">
-          <PlayerTexture sound={this.props.sound} update={this.update} />
-          <PlayerGradient sound={this.props.sound} update={this.update}  />
+          <PlayerTexture sound={this.props.sound} />
+          <PlayerGradient sound={this.props.sound} />
           <PlayButton handleClick={this.handleClick} sound={this.props.sound} />
           <PlayInlineStatus grabbingOn={this.handleMouseDown} 
                             grabbingOff={this.handleMouseUp} 
@@ -58,8 +58,8 @@ var StandardUIPlayer = React.createClass({
                             sound={this.props.sound} 
                             position={this.props.sound.position} 
                             duration={this.props.sound.durationEstimate} />
-          <PlayVolume sound={this.props.sound} update={this.update} />
-          <PlayMenu sound={this.props.sound} update={this.update} />
+          <PlayVolume sound={this.props.sound} />
+          <PlayMenu sound={this.props.sound} />
         </div>
       </div>
       /*jshint ignore:end */
