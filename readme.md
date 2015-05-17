@@ -84,4 +84,5 @@ soundManager.onready(function(){
 * Create Lyrics component
 * Playlist is not a playlist (rename it)
 * Refactor song metadata in one object.
+* Implement onError
 
