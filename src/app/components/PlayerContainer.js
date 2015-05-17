@@ -135,7 +135,7 @@ var PlayerContainer = React.createClass({
     return (
       /*jshint ignore:start */
       <StandardUIPlayer ref='player' sound={this.state.sound} 
-          update={this.update} author={this.props.author} songName={this.props.songName} fullWidth={this.props.fullWidth} />
+          author={this.props.author} songName={this.props.songName} fullWidth={this.props.fullWidth} />
       /*jshint ignore:end */
     );
   }
