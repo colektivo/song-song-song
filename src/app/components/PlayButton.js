@@ -10,7 +10,7 @@ var PlayButton = React.createClass({
           );
     return (
       /*jshint ignore:start */
-      <div className={classes} onClick={this.props.handleClick}>
+      <div className={classes} onClick={this.props.handlePlay}>
         <div className="sm2-button-bd">
           <a href="#play" className="sm2-inline-button play-pause" >Play / pause</a>
         </div>

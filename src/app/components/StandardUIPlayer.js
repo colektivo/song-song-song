@@ -19,12 +19,6 @@ var StandardUIPlayer = React.createClass({
       grabbing: false
     };
   },
-  componentWillMount: function() {
-  },
-  componentDidMount: function(){
-  },
-  componentWillUnmount: function(){
-  },
   handleMouseDown: function(e){
     this.setState({grabbing:true}); 
   },
@@ -32,9 +26,6 @@ var StandardUIPlayer = React.createClass({
     this.setState({
       grabbing: false
     }); 
-  },
-  handleClick: function(e){
-    this.props.sound.togglePause();
   },
   render: function(){
     var playing = (this.props.sound.playState == 0) ? false : !this.props.sound.paused;
@@ -50,7 +41,7 @@ var StandardUIPlayer = React.createClass({
         <div className="sm2-main-controls">
           <PlayerTexture sound={this.props.sound} />
           <PlayerGradient sound={this.props.sound} />
-          <PlayButton handleClick={this.handleClick} sound={this.props.sound} />
+          <PlayButton handlePlay={this.props.handlePlay} sound={this.props.sound} />
           <PlayInlineStatus grabbingOn={this.handleMouseDown} 
                             grabbingOff={this.handleMouseUp} 
                             songName={this.props.songName} 

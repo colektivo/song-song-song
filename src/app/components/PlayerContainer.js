@@ -2,7 +2,11 @@ var React = require('react');
 var StandardUIPlayer = require('./StandardUIPlayer');
 
 var PlayerContainer = React.createClass({
-  
+
+  handlePlayClick: function(e){
+    this.props.sound.togglePause();
+  },
+
   bindToEvents: function(){
 
     // update on current position
@@ -127,7 +131,7 @@ var PlayerContainer = React.createClass({
   render: function(){
     return (
       /*jshint ignore:start */
-      <StandardUIPlayer ref='player' sound={this.state.sound} 
+      <StandardUIPlayer ref='player' handlePlay={this.handlePlayClick} sound={this.state.sound} 
           author={this.props.author} songName={this.props.songName} fullWidth={this.props.fullWidth} />
       /*jshint ignore:end */
     );
