@@ -20,7 +20,6 @@ SongSongSongApp = React.createClass({
 });
 
 soundManager.onready(function(){
-  console.log("SoundManager ready");
 
   var sound = soundManager.createSound({
 
