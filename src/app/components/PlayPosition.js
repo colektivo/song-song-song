@@ -5,7 +5,7 @@ var TimeElapsed = React.createClass({
 
   render: function(){
 
-    var time = utils.getTime(this.props.position, true);
+    var time = utils.getTime(this.props.sound.position, true);
 
     return (
       /*jshint ignore:start */

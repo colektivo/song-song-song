@@ -43,8 +43,6 @@ var ProgressTrack = React.createClass({
 
     var barX, barWidth, x, newPosition;
 
-    this.target = React.findDOMNode(this);
-
     barX = utils.position.getOffX(this.target);
     barWidth = this.target.offsetWidth;
     x = (e.clientX - barX);
@@ -81,8 +79,8 @@ var ProgressTrack = React.createClass({
       
       /*jshint ignore:start */
       <div ref='progressTrack' className={classes} onMouseDown={this.handleMouseDown} >
-        <ProgressBar  position={this.props.position} duration={this.props.duration} />
-        <ProgressBall ref='progressBall' position={this.props.position} duration={this.props.duration} />
+        <ProgressBar sound={this.props.sound} />
+        <ProgressBall ref='progressBall' sound={this.props.sound} />
       </div>
       /*jshint ignore:end */
     );

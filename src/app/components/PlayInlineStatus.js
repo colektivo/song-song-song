@@ -18,8 +18,6 @@ var PlayInlineStatus = React.createClass({
         <PlayProgress 
             grabbingOn={this.props.grabbingOn} 
             grabbingOff={this.props.grabbingOff} 
-            position={this.props.position} 
-            duration={this.props.duration} 
             sound={this.props.sound} />
 
       </div>

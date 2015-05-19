@@ -5,7 +5,7 @@ var ProgressBar = React.createClass({
 
   render: function(){
     var width;
-    width = Math.min(100, Math.max(0, (100 * this.props.position / this.props.duration))) + '%';
+    width = Math.min(100, Math.max(0, (100 * this.props.sound.position / this.props.sound.duration))) + '%';
 
     var bar = {
       "width": width

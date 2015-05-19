@@ -11,16 +11,14 @@ var PlayProgress = React.createClass({
       /*jshint ignore:start */
       <div className="sm2-progress">
         <div className="sm2-row">
-          <TimeElapsed position={this.props.position} />
+          <TimeElapsed sound={this.props.sound} />
           <div className="sm2-progress-bd">
             <ProgressTrack 
                 grabbingOn={this.props.grabbingOn} 
                 grabbingOff={this.props.grabbingOff} 
-                position={this.props.position} 
-                duration={this.props.duration} 
                 sound={this.props.sound} />
           </div>
-          <PlayDuration duration={this.props.duration} />
+          <PlayDuration sound={this.props.sound} />
         </div>
       </div>
       /*jshint ignore:end */

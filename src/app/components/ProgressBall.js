@@ -7,7 +7,7 @@ var ProgressBall = React.createClass({
     var progressMaxLeft = 100,
         left;
 
-      left = Math.min(progressMaxLeft, Math.max(0, (progressMaxLeft * (this.props.position / this.props.duration)))) + '%';
+      left = Math.min(progressMaxLeft, Math.max(0, (progressMaxLeft * (this.props.sound.position / this.props.sound.duration)))) + '%';
       var ball = {
         "left": left
       };
