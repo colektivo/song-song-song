@@ -26,6 +26,7 @@ soundManager.onready(function(){
     id: 'mysong',
     autoLoad: false,
     autoPlay: false,
+    html5Only: true,
     url: url
   });
 
@@ -35,6 +36,5 @@ soundManager.onready(function(){
       /*jshint ignore:end */
       document.getElementById('app')
   );
-  
-});
 
+});

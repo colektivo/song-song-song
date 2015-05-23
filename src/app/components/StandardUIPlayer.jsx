@@ -20,12 +20,12 @@ var StandardUIPlayer = React.createClass({
     };
   },
   handleMouseDown: function(e){
-    this.setState({grabbing:true}); 
+    this.setState({grabbing:true});
   },
   handleMouseUp: function(e){
     this.setState({
       grabbing: false
-    }); 
+    });
   },
   render: function(){
     var playing = (this.props.sound.playState == 0) ? false : !this.props.sound.paused;
@@ -42,12 +42,12 @@ var StandardUIPlayer = React.createClass({
           <PlayerTexture sound={this.props.sound} />
           <PlayerGradient sound={this.props.sound} />
           <PlayButton handlePlay={this.props.handlePlay} sound={this.props.sound} />
-          <PlayInlineStatus grabbingOn={this.handleMouseDown} 
-                            grabbingOff={this.handleMouseUp} 
-                            songName={this.props.songName} 
-                            author={this.props.author} 
-                            sound={this.props.sound} 
-                            position={this.props.sound.position} 
+          <PlayInlineStatus grabbingOn={this.handleMouseDown}
+                            grabbingOff={this.handleMouseUp}
+                            songName={this.props.songName}
+                            author={this.props.author}
+                            sound={this.props.sound}
+                            position={this.props.sound.position}
                             duration={this.props.sound.durationEstimate} />
           <PlayVolume sound={this.props.sound} />
           <PlayMenu sound={this.props.sound} />
