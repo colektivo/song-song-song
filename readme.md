@@ -79,7 +79,7 @@ soundManager.onready(function(){
 ### ToDo
 
 * Mouse handling on ProgressTrack seems ugly
-* Fix bug when playing and grabbing the track position, eventually stop playing.
+* Fix bug when playing and grabbing the track position, eventually stop playing. Probably related to buffering.
 * Add tests (after exploring phase)
 * Create Lyrics component
 * Playlist is not a playlist (rename it)
