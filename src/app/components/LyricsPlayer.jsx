@@ -7,7 +7,7 @@ var LyricsPlayer = React.createClass({
     return (
       /*jshint ignore:start */
       <div className="">
-        the player 55
+        the player 2
         <audio />
       </div>
       /*jshint ignore:end */
