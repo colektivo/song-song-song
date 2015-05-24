@@ -1,7 +1,10 @@
 var React = require('react');
 var utils= require('../utilities/helpers');
+var hasSound = require('./HasSoundMixin');
 
 var ProgressBar = React.createClass({
+
+  mixins : [hasSound],
 
   render: function(){
     var width;

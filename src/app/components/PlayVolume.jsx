@@ -1,8 +1,11 @@
 var React = require('react');
 var utils= require('../utilities/helpers');
 var VolumeControl = require('./VolumeControl');
+var hasSound = require('./HasSoundMixin');
 
 var PlayVolume = React.createClass({
+
+  mixins : [hasSound],
 
   getInitialState: function(){
     // set as default the only value that we know

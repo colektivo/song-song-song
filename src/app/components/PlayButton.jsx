@@ -1,7 +1,11 @@
 var React = require('react');
 var classNames = require('classnames');
+var HasSoundObject = require('./HasSoundMixin');
 
 var PlayButton = React.createClass({
+
+  mixins : [HasSoundObject],
+
   render: function(){
 
     var classes = classNames( 

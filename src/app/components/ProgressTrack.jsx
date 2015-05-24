@@ -3,9 +3,12 @@ var utils= require('../utilities/helpers');
 var ProgressBall = require('./ProgressBall');
 var ProgressBar = require('./ProgressBar');
 var classNames = require('classnames');
+var hasSound = require('./HasSoundMixin');
 
 var ProgressTrack = React.createClass({
   
+  mixins : [hasSound],
+
   componentDidMount: function() {
     this.target = React.findDOMNode(this);
   },

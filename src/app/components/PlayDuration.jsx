@@ -1,8 +1,11 @@
 var React = require('react');
 var utils= require('../utilities/helpers');
+var hasSound = require('./HasSoundMixin');
 
 var Duration = React.createClass({
 
+  mixins : [hasSound],
+  
   render: function(){
 
     var duration = utils.getTime(this.props.sound.duration, true);

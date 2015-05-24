@@ -3,8 +3,11 @@ var utils= require('../utilities/helpers');
 var ProgressTrack = require('./ProgressTrack');
 var TimeElapsed = require('./PlayPosition');
 var PlayDuration = require('./PlayDuration');
+var hasSound = require('./HasSoundMixin');
 
 var PlayProgress = React.createClass({
+
+  mixins : [hasSound],
 
   render: function(){
     return (

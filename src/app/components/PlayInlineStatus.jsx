@@ -1,9 +1,13 @@
 var React = require('react');
 var PlayList = require('./PlayList');
 var PlayProgress = require('./PlayProgress');
+var hasSound = require('./HasSoundMixin');
 
 
 var PlayInlineStatus = React.createClass({
+
+  mixins : [hasSound],
+
   render: function(){
     return (
       /*jshint ignore:start */

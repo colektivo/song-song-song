@@ -8,12 +8,16 @@ var PlayVolume = require('./PlayVolume');
 var PlayMenu = require('./PlayMenu');
 var PlayList = require('./PlayList');
 var PlayProgress = require('./PlayProgress');
-var utils= require('../utilities/helpers');
+var PlayLyrics = require('./PlayLyrics');
+var utils = require('../utilities/helpers');
+var hasSound = require('./HasSoundMixin');
 
 var classNames = require('classnames');
 
 var StandardUIPlayer = React.createClass({
 
+  mixins : [hasSound],
+  
   getInitialState: function() {
     return {
       grabbing: false
@@ -52,6 +56,7 @@ var StandardUIPlayer = React.createClass({
           <PlayVolume sound={this.props.sound} />
           <PlayMenu sound={this.props.sound} />
         </div>
+        <PlayLyrics sound={this.props.sound} />
       </div>
       /*jshint ignore:end */
     )
