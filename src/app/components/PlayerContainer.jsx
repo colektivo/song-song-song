@@ -2,6 +2,20 @@ var React = require('react');
 var StandardUIPlayer = require('./StandardUIPlayer');
 
 var PlayerContainer = React.createClass({
+  
+  propTypes: {
+      authenticated: React.PropTypes.bool,
+      fullWidth: React.PropTypes.string,
+      sound: React.PropTypes.object.isRequired,
+      songName: React.PropTypes.string.isRequired,
+      author: React.PropTypes.string.isRequired
+  },
+
+  getDefaultProps: function() {
+    return {
+      authenticated: false
+    };
+  },
 
   handlePlayClick: function(e){
     this.props.sound.togglePause();
