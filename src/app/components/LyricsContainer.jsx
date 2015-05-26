@@ -8,7 +8,7 @@ var LyricsContainer = React.createClass({
       /*jshint ignore:start */
       <div className="">
 
-        <textarea>hola</textarea>
+        <textarea defaultValue="hola"></textarea>
 
       </div>
       /*jshint ignore:end */
