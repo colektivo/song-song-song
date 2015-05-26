@@ -6,8 +6,8 @@ module.exports = {
   devtool: 'eval',
   entry: [
     'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
-    './app.jsx'
+    'webpack/hot/dev-server',
+    path.resolve(__dirname, 'src/app/app.jsx')
   ],
   output: {
     path: path.join(__dirname, 'app'),

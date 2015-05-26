@@ -11,7 +11,7 @@ SongSongSongApp = React.createClass({
     return (
         /*jshint ignore:start */
         <div>
-            <h2>Hello, Play React</h2>
+            <h2>Hello, Play React Rocks.</h2>
             <PlayerContainer sound={this.props.sound} songName={this.props.songName} author={this.props.author} fullWidth={this.props.fullWidth}/>
         </div>
         /*jshint ignore:end */
@@ -30,11 +30,20 @@ soundManager.onready(function(){
     url: url
   });
 
-  React.render(
+  var rootInstance = React.render(
       /*jshint ignore:start */
       <SongSongSongApp sound={sound} songName='Morir por qué?' author='No Mataras' fullWidth='true' />,
       /*jshint ignore:end */
       document.getElementById('app')
   );
+
+  if (module.hot) {
+    require('react-hot-loader/Injection').RootInstanceProvider.injectProvider({
+      getRootInstances: function () {
+        // Help React Hot Loader figure out the root component instances on the page:
+        return [rootInstance];
+      }
+    });
+  }
 
 });
