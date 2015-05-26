@@ -2,23 +2,28 @@ var React = require('react');
 var StandardUIPlayer = require('./StandardUIPlayer');
 
 var PlayerContainer = React.createClass({
-  
+
   propTypes: {
-      authenticated: React.PropTypes.bool,
-      fullWidth: React.PropTypes.string,
-      sound: React.PropTypes.object.isRequired,
-      songName: React.PropTypes.string.isRequired,
-      author: React.PropTypes.string.isRequired
+    id: React.PropTypes.string,
+    autoLoad: React.PropTypes.bool,
+    autoPlay: React.PropTypes.bool,
+    html5Only: React.PropTypes.bool,
+    url: React.PropTypes.string.isRequired,
+    authenticated: React.PropTypes.bool,
+    fullWidth: React.PropTypes.string,
+    songName: React.PropTypes.string.isRequired,
+    author: React.PropTypes.string.isRequired
   },
 
   getDefaultProps: function() {
     return {
-      authenticated: false
+      authenticated: false,
+      id: 'mysong'
     };
   },
 
   handlePlayClick: function(e){
-    this.props.sound.togglePause();
+    this.sound.togglePause();
   },
 
   bindToEvents: function(){
@@ -29,7 +34,7 @@ var PlayerContainer = React.createClass({
     var onFinish = function(){this.finish()}.bind(this);
 
     // try to catch the events when load
-    this.props.sound.load({
+    this.sound.load({
 
       whileplaying: function() {
         updatePlay();
@@ -120,13 +125,21 @@ var PlayerContainer = React.createClass({
   
   componentWillMount: function(){
 
+    this.sound = soundManager.createSound({
+      id: this.props.id,
+      autoLoad: this.props.autoLoad,
+      autoPlay: this.props.autoPlay,
+      html5Only: this.props.html5Only,
+      url: this.props.url
+    });
+
     // this is the way that I found to be able to update the component from the sound object callback
     this.bindToEvents();
-    
+
   },
 
   getInitialState: function() {
-    return {sound: this.props.sound};
+    return {sound: this.sound};
   },
 
   finish: function() {
@@ -139,13 +152,13 @@ var PlayerContainer = React.createClass({
   },
   
   update: function() {
-    this.setState({ sound: this.props.sound});
+    this.setState({ sound: this.sound});
   },
   
   render: function(){
     return (
       /*jshint ignore:start */
-      <StandardUIPlayer ref='player' handlePlay={this.handlePlayClick} sound={this.state.sound} 
+      <StandardUIPlayer ref='player' handlePlay={this.handlePlayClick} sound={this.sound} 
           author={this.props.author} songName={this.props.songName} fullWidth={this.props.fullWidth} />
       /*jshint ignore:end */
     );
