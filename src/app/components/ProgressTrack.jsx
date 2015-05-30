@@ -79,7 +79,7 @@ var ProgressTrack = React.createClass({
 
     var classes = classNames('sm2-progress-track');
     var progressMaxLeft = 100
-    var left = Math.min(progressMaxLeft, Math.max(0, (progressMaxLeft * (this.props.sound.position / this.props.sound.duration)))) + '%';
+    var left = Math.min(progressMaxLeft, Math.max(0, (progressMaxLeft * ( utils.getSoundPosition(this.props.sound) / utils.getSoundDuration(this.props.sound))))) + '%';
     
     return (
       

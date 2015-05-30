@@ -1,5 +1,5 @@
 var utils = {
-  
+
   style: function(node, styleProp) {
     var value;
 
@@ -86,8 +86,15 @@ var utils = {
       // if (min === 0 && sec === 0) return null; // return 0:00 as null
 
       return (useString ? ((hh ? hh + ':' : '') + (hh && min < 10 ? '0' + min : min) + ':' + ( sec < 10 ? '0' + sec : sec ) ) : { 'min': min, 'sec': sec });
-    }
+  },
 
+  getSoundPosition: function(sound) {
+    return (sound.position) ? sound.position : 0;
+  },
+  
+  getSoundDuration: function(sound) {
+    return (sound.duration) ? sound.duration : 1;
   }
+}
 
 module.exports = utils;
