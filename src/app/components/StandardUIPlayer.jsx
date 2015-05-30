@@ -43,7 +43,7 @@ var StandardUIPlayer = React.createClass({
     return (
       /*jshint ignore:start */
       <div className={classes}>
-        <div className="sm2-main-controls">
+        <div className="sm2-main-controls bd">
           <PlayerTexture sound={this.props.sound} className='sm2-inline-texture' />
           <PlayerGradient sound={this.props.sound} />
           <PlayButton handlePlay={this.props.handlePlay} sound={this.props.sound} />
