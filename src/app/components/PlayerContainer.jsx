@@ -11,6 +11,7 @@ var PlayerContainer = React.createClass({
     url: React.PropTypes.string.isRequired,
     authenticated: React.PropTypes.bool,
     fullWidth: React.PropTypes.string,
+    textured: React.PropTypes.bool,
     songName: React.PropTypes.string.isRequired,
     author: React.PropTypes.string.isRequired
   },
@@ -18,6 +19,8 @@ var PlayerContainer = React.createClass({
   getDefaultProps: function() {
     return {
       authenticated: false,
+      fullWidth: false,
+      textured: true,
       id: 'mysong'
     };
   },
@@ -25,7 +28,7 @@ var PlayerContainer = React.createClass({
   handlePlayClick: function(e){
     this.sound.togglePause();
   },
-
+  
   bindToEvents: function(){
 
     // update on current position
@@ -35,6 +38,10 @@ var PlayerContainer = React.createClass({
 
     // try to catch the events when load
     this.sound.load({
+      
+      onbufferchange: function(isBuffering) {
+        updatePlay();
+      },
 
       whileplaying: function() {
         updatePlay();
@@ -159,7 +166,7 @@ var PlayerContainer = React.createClass({
     return (
       /*jshint ignore:start */
       <StandardUIPlayer ref='player' handlePlay={this.handlePlayClick} sound={this.sound} 
-          author={this.props.author} songName={this.props.songName} fullWidth={this.props.fullWidth} />
+          author={this.props.author} songName={this.props.songName} fullWidth={this.props.fullWidth} textured={this.props.textured} />
       /*jshint ignore:end */
     );
   }
