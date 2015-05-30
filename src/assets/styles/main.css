@@ -1,5 +1,19 @@
-/* Main.css */
+/* Main.css override default sm2-bar-ui css and general style for demo */
 
 body {
-  background: #fc0;
+  background: #333;
+  color: #ffa027;
+  font-family: helvetica, arial, verdana, sans-serif;
+  font-weight: normal;
+}
+
+.sm2-bar-ui {
+ font-size: 22px;
+}
+.sm2-bar-ui .sm2-main-controls,
+.sm2-bar-ui .sm2-playlist-drawer {
+ background-color: #ffa027;
+}
+.sm2-bar-ui .sm2-inline-texture {
+  background: url(/src/assets/vendor/sm2/image/patterns/tweed.png);
 }
