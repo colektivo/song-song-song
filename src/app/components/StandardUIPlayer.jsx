@@ -35,6 +35,7 @@ var StandardUIPlayer = React.createClass({
     var playing = (this.props.sound.playState == 0) ? false : !this.props.sound.paused;
     var classes = classNames('sm2-bar-ui',
     {'full-width': this.props.fullWidth },
+    {'textured': this.props.textured },
     {playing: playing },
     {grabbing: this.state.grabbing },
     {buffering: this.props.sound.isBuffering },
@@ -43,7 +44,7 @@ var StandardUIPlayer = React.createClass({
       /*jshint ignore:start */
       <div className={classes}>
         <div className="sm2-main-controls">
-          <PlayerTexture sound={this.props.sound} />
+          <PlayerTexture sound={this.props.sound} className='sm2-inline-texture' />
           <PlayerGradient sound={this.props.sound} />
           <PlayButton handlePlay={this.props.handlePlay} sound={this.props.sound} />
           <PlayInlineStatus grabbingOn={this.handleMouseDown}
@@ -56,7 +57,6 @@ var StandardUIPlayer = React.createClass({
           <PlayVolume sound={this.props.sound} />
           <PlayMenu sound={this.props.sound} />
         </div>
-        <PlayLyrics sound={this.props.sound} />
       </div>
       /*jshint ignore:end */
     )
