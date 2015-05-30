@@ -17,6 +17,14 @@ var utils = {
     
   },
 
+  getXY: function(e){
+    var position = (e.touches && e.touches[0]) || e;
+    return {
+      clientX: position.clientX,
+      clientY: position.clientY
+    }
+  },
+
   position: (function() {
 
     function getOffX(o) {
@@ -91,7 +99,7 @@ var utils = {
   getSoundPosition: function(sound) {
     return (sound.position) ? sound.position : 0;
   },
-  
+
   getSoundDuration: function(sound) {
     return (sound.duration) ? sound.duration : 1;
   }

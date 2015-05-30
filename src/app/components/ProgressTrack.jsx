@@ -23,7 +23,6 @@ var ProgressTrack = React.createClass({
   },
 
   handleDrag: function (e, ui) {
-    console.log('handle left:' + ui.position.left);
     this.setNewPosition(e);
     this.setState({
       position: ui.position
@@ -57,10 +56,12 @@ var ProgressTrack = React.createClass({
   setNewPosition: function(e){
 
     var barX, barWidth, x, newPosition;
+    var clientPos = utils.getXY(e);
 
     barX = utils.position.getOffX(this.target);
     barWidth = this.target.offsetWidth;
-    x = (e.clientX - barX);
+
+    x = (clientPos.clientX - barX);
     newPosition = (x / barWidth);
 
     if (this.canSeek()) {
