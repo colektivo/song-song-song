@@ -1,33 +1,45 @@
-var React = require('react');
+var React = require('react/addons');
 var utils= require('../utilities/helpers');
-var ProgressBall = require('./ProgressBall');
 var ProgressBar = require('./ProgressBar');
 var classNames = require('classnames');
 var hasSound = require('./HasSoundMixin');
+var Draggable = require('react-draggable2');
 
 var ProgressTrack = React.createClass({
   
   mixins : [hasSound],
+  
+  getInitialState: function () {
+    return {
+      position: {
+        top: 0, left: 0
+      },
+      activeDrags: 0
+    };
+  },
+
+  handleClick: function(e){
+    this.setNewPosition(e);
+  },
+
+  handleDrag: function (e, ui) {
+    console.log('handle left:' + ui.position.left);
+    this.setNewPosition(e);
+    this.setState({
+      position: ui.position
+    });
+  },
+
+  onStart: function() {
+    this.props.grabbingOn();
+    this.setState({activeDrags: ++this.state.activeDrags});
+  },
 
   componentDidMount: function() {
     this.target = React.findDOMNode(this);
   },
 
   componentWillUnmount: function() {
-  },
-
-  handleRelease: function(e){
-
-    window.removeEventListener('mousemove', this.handleMouse);
-
-    if (e.preventDefault) {
-      e.preventDefault();
-    }
-
-    this.props.grabbingOff();
-
-    window.removeEventListener('mouseup', this.handleRelease);
-
   },
 
   //
@@ -41,8 +53,8 @@ var ProgressTrack = React.createClass({
         )
       );
   },
-
-  handleMouse: function(e){
+  
+  setNewPosition: function(e){
 
     var barX, barWidth, x, newPosition;
 
@@ -56,34 +68,29 @@ var ProgressTrack = React.createClass({
       // a little hackish: ensure UI updates immediately with current position, even if audio is buffering and hasn't moved there yet.
       this.props.sound._iO.whileplaying.apply(this.props.sound);
     }
-    
-    if (e.preventDefault) {
-      e.preventDefault();
-    }
-    
   },
 
-  handleMouseDown: function(e){
-
-    window.addEventListener('mousemove', this.handleMouse);
-    window.addEventListener('mouseup', this.handleRelease);
-
-    this.props.grabbingOn();
-
-    return this.handleMouse(e);
-
+  onStop: function(e){
+    this.props.grabbingOff();
+    this.setState({activeDrags: --this.state.activeDrags});
   },
 
   render: function(){
 
     var classes = classNames('sm2-progress-track');
+    var progressMaxLeft = 100
+    var left = Math.min(progressMaxLeft, Math.max(0, (progressMaxLeft * (this.props.sound.position / this.props.sound.duration)))) + '%';
     
     return (
       
       /*jshint ignore:start */
-      <div ref='progressTrack' className={classes} onMouseDown={this.handleMouseDown} >
+      <div ref='progressTrack' className={classes} onClick={this.handleClick}>
         <ProgressBar sound={this.props.sound} />
-        <ProgressBall ref='progressBall' sound={this.props.sound} />
+        <Draggable bound="all box" onDrag={this.handleDrag} axis="x" zIndex={100} start={{x: left}} handle=".handle" onStart={this.onStart} onStop={this.onStop}>
+          <div className="sm2-progress-ball handle">
+            <div className="icon-overlay"></div>
+          </div>
+        </Draggable>
       </div>
       /*jshint ignore:end */
     );
