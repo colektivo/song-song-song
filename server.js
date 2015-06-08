@@ -8,6 +8,7 @@ new WebpackDevServer(webpack(config), {
   hot: true,
   stats: { colors: true },
   filename: "bundle.js",
+  headers: { 'Access-Control-Allow-Origin': '*' },
   historyApiFallback: true
 }).listen(3000, 'localhost', function (err, result) {
   if (err) {
