@@ -8,7 +8,6 @@ var PlayVolume = require('./PlayVolume');
 var PlayMenu = require('./PlayMenu');
 var PlayList = require('./PlayList');
 var PlayProgress = require('./PlayProgress');
-var PlayLyrics = require('./PlayLyrics');
 var utils = require('../utilities/helpers');
 var hasSound = require('./HasSoundMixin');
 
@@ -35,11 +34,14 @@ var StandardUIPlayer = React.createClass({
     var playing = (this.props.sound.playState == 0) ? false : !this.props.sound.paused;
     var classes = classNames('sm2-bar-ui',
     {'full-width': this.props.fullWidth },
+    {'flat': this.props.flat },
     {'textured': this.props.textured },
+    {'fixed': this.props.fixed },
     {playing: playing },
     {grabbing: this.state.grabbing },
     {buffering: this.props.sound.isBuffering },
-    {paused: !playing })
+    {paused: !playing });
+    
     return (
       /*jshint ignore:start */
       <div className={classes}>
@@ -55,7 +57,7 @@ var StandardUIPlayer = React.createClass({
                             position={this.props.sound.position}
                             duration={this.props.sound.durationEstimate} />
           <PlayVolume sound={this.props.sound} />
-          <PlayMenu sound={this.props.sound} />
+          <PlayMenu sound={this.props.sound} toggleActions={this.props.toggleActions}/>
         </div>
       </div>
       /*jshint ignore:end */

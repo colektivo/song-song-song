@@ -1,8 +1,18 @@
 var React = require('react');
 var utils= require('../utilities/helpers');
 var LyricsContainer = require('./LyricsContainer');
-var LyricsPlayer = require('./LyricsPlayer');
 var hasSound = require('./HasSoundMixin');
+
+var LyricsPlayer = React.createClass({
+
+  render: function(){
+    return (
+      /*jshint ignore:start */
+      <audio />
+      /*jshint ignore:end */
+    );
+  }
+});
 
 var PlayLyrics = React.createClass({
 
@@ -11,10 +21,10 @@ var PlayLyrics = React.createClass({
   render: function(){
     return (
       /*jshint ignore:start */
-      <div className="">
+      <div>
 
         <LyricsPlayer ref="lyricsPlayer" />
-        <LyricsContainer ref="lyrics" />
+        <LyricsContainer ref="lyrics" sound={this.props.sound} />
 
       </div>
       /*jshint ignore:end */

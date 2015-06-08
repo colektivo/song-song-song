@@ -1,5 +1,8 @@
 var React = require('react');
 var StandardUIPlayer = require('./StandardUIPlayer');
+var PlayerActions = require('./PlayerActions');
+var PlayLyrics = require('./PlayLyrics');
+var classNames = require('classnames');
 
 var PlayerContainer = React.createClass({
 
@@ -10,8 +13,10 @@ var PlayerContainer = React.createClass({
     html5Only: React.PropTypes.bool,
     url: React.PropTypes.string.isRequired,
     authenticated: React.PropTypes.bool,
-    fullWidth: React.PropTypes.string,
+    fullWidth: React.PropTypes.bool,
     textured: React.PropTypes.bool,
+    flat: React.PropTypes.bool,
+    fixed: React.PropTypes.bool,
     songName: React.PropTypes.string.isRequired,
     author: React.PropTypes.string.isRequired
   },
@@ -20,6 +25,8 @@ var PlayerContainer = React.createClass({
     return {
       authenticated: false,
       fullWidth: false,
+      flat: true,
+      fixed: false,
       textured: true,
       id: 'mysong'
     };
@@ -27,6 +34,10 @@ var PlayerContainer = React.createClass({
 
   handlePlayClick: function(e){
     this.sound.togglePause();
+  },
+
+  toggleActions: function(e){
+    this.setState({actions: !this.state.actions});
   },
   
   bindToEvents: function(){
@@ -146,7 +157,10 @@ var PlayerContainer = React.createClass({
   },
 
   getInitialState: function() {
-    return {sound: this.sound};
+    return {
+      sound: this.sound,
+      actions: false
+    };
   },
 
   finish: function() {
@@ -163,10 +177,31 @@ var PlayerContainer = React.createClass({
   },
   
   render: function(){
+    var classes = classNames({
+      'windowed': this.props.windowed},
+      'demo-bd',
+      'boxes'
+    );
     return (
       /*jshint ignore:start */
-      <StandardUIPlayer ref='player' handlePlay={this.handlePlayClick} sound={this.sound} 
-          author={this.props.author} songName={this.props.songName} fullWidth={this.props.fullWidth} textured={this.props.textured} />
+      <div className={classes}>
+        <div className={'boxed'}>
+          <PlayLyrics sound={this.sound} />
+          <PlayerActions className={'actions'} sound={this.sound} visible={this.state.actions} />
+        </div>
+        <StandardUIPlayer ref='player'
+            handlePlay={this.handlePlayClick} 
+            sound={this.sound} 
+            showActions={this.state.actions}
+            toggleActions={this.toggleActions}
+            author={this.props.author} 
+            songName={this.props.songName} 
+            fullWidth={this.props.fullWidth} 
+            textured={this.props.textured} 
+            flat={this.props.flat}
+            fixed={this.props.fixed}
+            />
+      </div>
       /*jshint ignore:end */
     );
   }

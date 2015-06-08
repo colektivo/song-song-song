@@ -10,10 +10,7 @@ SongSongSongApp = React.createClass({
   render: function() {
     return (
         /*jshint ignore:start */
-        <div className='demo-bd'>
-            <h2>Hello, Play React Rocks.</h2>
-            <PlayerContainer url={this.props.url} songName={this.props.songName} author={this.props.author} fullWidth={this.props.fullWidth}/>
-        </div>
+        <PlayerContainer windowed={true} url={this.props.url} songName={this.props.songName} author={this.props.author} fixed={this.props.fixed} fullWidth={this.props.fullWidth}/>
         /*jshint ignore:end */
     );
   }
@@ -23,7 +20,7 @@ soundManager.onready(function(){
 
   var rootInstance = React.render(
       /*jshint ignore:start */
-      <SongSongSongApp url={url} songName='Inconsciente' author='No Mataras' fullWidth='true' />,
+      <SongSongSongApp url={url} songName='Inconsciente' author='No Mataras' fullWidth={true} flat={true} fixed={true} />,
       /*jshint ignore:end */
       document.getElementById('app')
   );
