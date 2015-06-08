@@ -1,19 +1,105 @@
 /* Main.css override default sm2-bar-ui css and general style for demo */
 
+html{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
-  background: #333;
+  background: url(/src/assets/images/incosciente01.jpg) no-repeat;
+  /*
+  background-size: 100% auto;
+  */
+  background-size: cover;
+  background-color: #333;
   color: #ffa027;
   font-family: helvetica, arial, verdana, sans-serif;
   font-weight: normal;
+  width: 100%;
+  height: 100%;
 }
 
 .sm2-bar-ui {
- font-size: 16px;
+ font-size: 22px;
 }
+
 .sm2-bar-ui .sm2-main-controls,
 .sm2-bar-ui .sm2-playlist-drawer {
- background-color: #ffa027;
+ background-color: #cccac7; /* non-RGBA fallback */
+ background-color: rgba(204, 202, 199, 0.15);
 }
 .sm2-bar-ui .sm2-inline-texture {
-  background: url(/src/assets/vendor/sm2/image/patterns/tweed.png);
+ background: transparent;
 }
+
+.hide {
+  display: none;
+  visibility: hidden;
+}
+
+.boxed, .windowed{
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+#app, .boxes {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.actions {
+  z-index:2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.lyrics {
+  font-family: Love Ya Like A Sister;
+  color: #363636;
+  color: rgba(22,22,22,0.7);
+  font-size:3em;
+  /* neon */
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de, 0 0 80px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de;
+  /*
+  fire
+  text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20px -20px 40px #ffae34, 20px -40px 50px #ec760c, -20px -60px 60px #cd4606, 0 -80px 70px #973716, 10px -90px 80px #451b0e;
+  */
+  animation-name: cf3FadeInOut;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.modal {
+  z-index: 11; /* 1px higher than the overlay layer */
+  max-height: calc(100% - 100px);
+   position: fixed;
+     top: 50%;
+     left: 50%;
+   transform: translate(-50%, -50%);
+}
+
+@keyframes cf3FadeInOut {
+  0% {
+    opacity:0;
+  }
+  45% {
+    opacity:0.5;
+  }
+  55% {
+    opacity:0.8;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
