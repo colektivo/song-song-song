@@ -1,41 +1,74 @@
 var webpack = require('webpack');
 var path = require('path');
+var I18nPlugin = require("i18n-webpack-plugin");
+var languages = {
+    "en": null,
+    "es": require("./src/locales/es.json"),
+    "de": require("./src/locales/de.json")
+};
+// 'webpack-dev-server/client?http://192.168.1.122:3000',
 
-module.exports = {
-  context: __dirname + '/src/app',
-  devtool: 'eval',
-  entry: [
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/dev-server',
-    path.resolve(__dirname, 'src/app/app.jsx')
-  ],
-  output: {
-    path: path.join(__dirname, 'app'),
-    publicPath: '/',
-    filename: 'bundle.js'
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-  ],
-  module: {
-      loaders: [
-        { test: /\.jsx?$/, 
-          loaders: ['react-hot', 'jsx?harmony'], 
-          include: path.join(__dirname, 'src/app') },
-        { test: /\.css$/, loader: "style!css" }
-      ]
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx'],
-    resolve: {
-      root: [path.join(__dirname, "bower_components")]
+//  devtool: 'source-map',
+
+// loader: 'css-loader!stylus-loader?paths=node_modules/bootstrap-stylus/stylus/'
+//          { test: /\.css$/, loader: "style-loader!css-loader" },
+
+var isDev = process.env.NODE_ENV;
+
+// css
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var stylusLoader = ExtractTextPlugin.extract("style-loader", "css-loader!stylus-loader");
+
+
+module.exports = Object.keys(languages).map(function(language) {
+  return {
+    name: language,
+    context: __dirname + '/src/app',
+    devtool: process.env.WEBPACK_DEVTOOL || 'source-map',
+    debug: true,
+    entry: [
+      'webpack-dev-server/client?http://0.0.0.0:3000',
+      'webpack/hot/dev-server',
+      path.resolve(__dirname, 'src/app/app.jsx')
+    ],
+    output: {
+      path: path.join(__dirname, 'app'),
+      publicPath: '/',
+      filename: language + ".bundle.js"
     },
     plugins: [
-        new webpack.ResolverPlugin(
+      new I18nPlugin(languages[language]),
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoErrorsPlugin(),
+      new ExtractTextPlugin("[name].css")
+    ],
+    module: {
+        loaders: [
+          { test: /\.jsx?$/, 
+            exclude: /(node_modules|bower_components)/,
+            loaders: ['react-hot', 'babel?optional[]=runtime&stage=0'],
+            include: path.join(__dirname, 'src/app') 
+          },
+          { test: /\.styl$/, 
+            loader: stylusLoader }
+        ]
+    },
+    resolve: {
+      
+      extensions: ['', '.js', '.jsx', '.css', '.styl'],
+      resolve: {
+        root: [path.join(__dirname, "bower_components"), path.join(__dirname, "assets", "styles")]
+      },
+      plugins: [
+          new webpack.ResolverPlugin(
             new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin("bower.json", ["main"])
-        )
-    ]
-  }
+          )
+      ]
+    }
+  };
+});
 
+module.exports.output = {
+  // EDIT: for webpack-dev-server to serve files under /some-public-path/
+  publicPath: "/"
 };
