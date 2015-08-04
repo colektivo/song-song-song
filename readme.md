@@ -87,12 +87,12 @@ npm start
 ```
 
 
+
+
 ### ToDo
 
+* move css to radium
 * Add tests (after exploring phase)
-* Create Lyrics component
-* Playlist is not a playlist (rename it)
-* Refactor song metadata in one object.
 * Implement onError
 * Implement onLoad
 * Implement whileloading for flash player
