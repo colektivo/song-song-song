@@ -5,7 +5,6 @@ var PlayerTexture = require('./PlayerTexture');
 var PlayerGradient = require('./PlayerGradient');
 var PlayInlineStatus = require('./PlayInlineStatus');
 var PlayVolume = require('./PlayVolume');
-var PlayMenu = require('./PlayMenu');
 var PlayList = require('./PlayList');
 var PlayProgress = require('./PlayProgress');
 var utils = require('../utilities/helpers');
@@ -46,8 +45,6 @@ var StandardUIPlayer = React.createClass({
       /*jshint ignore:start */
       <div className={classes}>
         <div className="sm2-main-controls bd">
-          <PlayerTexture sound={this.props.sound} className='sm2-inline-texture' />
-          <PlayerGradient sound={this.props.sound} />
           <PlayButton handlePlay={this.props.handlePlay} sound={this.props.sound} />
           <PlayInlineStatus grabbingOn={this.handleMouseDown}
                             grabbingOff={this.handleMouseUp}
@@ -57,7 +54,6 @@ var StandardUIPlayer = React.createClass({
                             position={this.props.sound.position}
                             duration={this.props.sound.durationEstimate} />
           <PlayVolume sound={this.props.sound} />
-          <PlayMenu sound={this.props.sound} toggleActions={this.props.toggleActions}/>
         </div>
       </div>
       /*jshint ignore:end */

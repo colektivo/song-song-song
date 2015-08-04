@@ -1,7 +1,5 @@
 var React = require('react');
 var StandardUIPlayer = require('./StandardUIPlayer');
-var PlayerActions = require('./PlayerActions');
-var PlayLyrics = require('./PlayLyrics');
 var classNames = require('classnames');
 
 var PlayerContainer = React.createClass({
@@ -179,16 +177,11 @@ var PlayerContainer = React.createClass({
   render: function(){
     var classes = classNames({
       'windowed': this.props.windowed},
-      'demo-bd',
-      'boxes'
+      'demo-bd'
     );
     return (
       /*jshint ignore:start */
       <div className={classes}>
-        <div className={'boxed'}>
-          <PlayLyrics sound={this.sound} />
-          <PlayerActions className={'actions'} sound={this.sound} visible={this.state.actions} />
-        </div>
         <StandardUIPlayer ref='player'
             handlePlay={this.handlePlayClick} 
             sound={this.sound} 
