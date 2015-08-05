@@ -84,8 +84,6 @@ class PlayVolume extends React.Component {
 
   _onMouseDown(e){
 
-    console.log('down1');
-
     if (e.target === this.control || e.target === this.controlShade) {
 
       this.setState(objectAssign({
@@ -93,7 +91,6 @@ class PlayVolume extends React.Component {
         isMoving: false
       }));
 
-      console.log('down2');
       var value, x, y, volume, width, height, backgroundSize;
       
       x = utils.position.getOffX(this.control);
@@ -108,9 +105,7 @@ class PlayVolume extends React.Component {
   }
   
   _onMouseUp(e) {
-    console.log(this.state);
       if( this.state.isMouseDown ) {
-        console.log('up');
         this.setState({
           isMouseDown: false,
           isMoving: false
@@ -121,7 +116,6 @@ class PlayVolume extends React.Component {
 
   _onMouseMove(e) {
       if(this.state.isMouseDown) {
-        console.log('down move');
         this.setState(
           objectAssign({
             isMoving: true,
@@ -132,7 +126,6 @@ class PlayVolume extends React.Component {
   
   _adjustVolume(e) {
     
-    console.log('adjust');
 
     var backgroundSize,
         backgroundMargin,
