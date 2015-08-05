@@ -1,22 +1,28 @@
 var React = require('react');
+var Radium = require('radium');
+var objectAssign = require('react/lib/Object.assign');
 var utils= require('../utilities/helpers');
 var VolumeControl = require('./VolumeControl');
-var hasSound = require('./HasSoundMixin');
 
-var PlayVolume = React.createClass({
+@Radium
+class PlayVolume extends React.Component {
 
-  mixins : [hasSound],
 
-  getInitialState: function(){
-    // set as default the only value that we know
-    return {
+  constructor() {
+    super();
+    this.state = {
+      isMouseDown: false,
+      isMoving: false,
       volume: {
         value: 1
       }
     }
-  },
-
-  updateControl: function(){
+    this._onMouseDown = this._onMouseDown.bind(this);
+    this._onMouseUp = this._onMouseUp.bind(this);
+    this._onMouseMove = this._onMouseMove.bind(this);
+    
+  }
+  updateControl() {
     // 60% wide means 20% margin on each side.
     
     var value, x, y, width, height, volume;
@@ -48,20 +54,46 @@ var PlayVolume = React.createClass({
     this.setState({ volume: volume });    
 
     return volume;
-  },
+  }
 
-  componentDidMount: function(){
+  componentDidMount(){
+
+    var node = React.findDOMNode(this);
+
+    node.addEventListener('mousedown', this._onMouseDown);
+
+    window.addEventListener('mousemove', this._onMouseMove);
+    window.addEventListener('mouseup', this._onMouseUp);
+
 
     this.control = React.findDOMNode(this.refs.volumeControl);
     this.controlShade = React.findDOMNode(this.refs.controlShade);
+
     this.updateControl();
     
-  },
+  }
+  
+  componentWillUnmount() {
+      var node = React.findDOMNode(this);
 
-  handleMouseDown: function(e){
+      node.removeEventListener('mousedown', this._onMouseDown);
+      document.removeEventListener('mousemove', this._onMouseMove);
+      document.removeEventListener('mouseup', this._onMouseUp);
+
+  }
+
+  _onMouseDown(e){
+
+    console.log('down1');
 
     if (e.target === this.control || e.target === this.controlShade) {
 
+      this.setState(objectAssign({
+        isMouseDown: true,
+        isMoving: false
+      }));
+
+      console.log('down2');
       var value, x, y, volume, width, height, backgroundSize;
       
       x = utils.position.getOffX(this.control);
@@ -70,15 +102,37 @@ var PlayVolume = React.createClass({
       width = this.control.offsetWidth;
       height = this.control.offsetHeight;
 
-      window.addEventListener('mousemove', this.adjustVolume);
-      window.addEventListener('mouseup', this.releaseVolume);
-
-      this.adjustVolume(e);
+      this._adjustVolume(e);
 
     }
-  },
+  }
+  
+  _onMouseUp(e) {
+    console.log(this.state);
+      if( this.state.isMouseDown ) {
+        console.log('up');
+        this.setState({
+          isMouseDown: false,
+          isMoving: false
+        });
+        this._adjustVolume(e);
+      }
+  }
 
-  adjustVolume: function(e) {
+  _onMouseMove(e) {
+      if(this.state.isMouseDown) {
+        console.log('down move');
+        this.setState(
+          objectAssign({
+            isMoving: true,
+          }));
+        this._adjustVolume(e);
+      }
+  }
+  
+  _adjustVolume(e) {
+    
+    console.log('adjust');
 
     var backgroundSize,
         backgroundMargin,
@@ -106,7 +160,7 @@ var PlayVolume = React.createClass({
     // relative position of mouse over element
     controlData.value = Math.max(0, Math.min(1, (e.clientX - controlData.x) / controlData.width));
 
-    this.setState({ volume: controlData });    
+    this.setState(objectAssign({ volume: controlData }));    
 
     // determine logical volume, including background margin
     pixelMargin = ((backgroundMargin/100) * controlData.width);
@@ -120,27 +174,60 @@ var PlayVolume = React.createClass({
       e.preventDefault();
     }
 
-  },
+  }
 
-  releaseVolume: function(/* e */) {
-
-    window.removeEventListener('mousemove', this.adjustVolume);
-    window.removeEventListener('mouseup', this.releaseVolume); 
-
-  },
-  
-  render: function(){
+  render(){
     return (
       /*jshint ignore:start */
-      <div className="sm2-inline-element sm2-button-element sm2-volume" onMouseDown={this.handleMouseDown}>
-        <div className="sm2-button-bd">
-          <span className="sm2-inline-button sm2-volume-control volume-shade" ref="controlShade"></span>
+      <div id="volumeWrapper" style={styles.volumeWrapper} >
+        <div id="volumeBorder" style={styles.volumeBorder} >
+          <span style={styles.volumeShade} id="controlShade" ref="controlShade"></span>
           <VolumeControl ref="volumeControl" volume={this.state.volume}/>
         </div>
       </div>
       /*jshint ignore:end */
     );
   }
-});
+  
+  
+}
+
+var styles = {
+  volumeWrapper: {
+    position: 'relative',
+    verticalAlign: 'middle',
+    padding: 0,
+    minWidth: '2.8em',
+    minHeight: '2.8em',
+    overflow: 'hidden',
+    display: 'table-cell',
+    width: '1%'
+  },
+  volumeBorder: {
+    minWidth: '2.8em',
+    minHeight: '2.8em',
+    position: 'relative',
+  },
+  volumeShade: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    opacity: '0.33',
+    backgroundPosition: '42% 50%',
+    backgroundSize: '56% auto',
+    backgroundImage: 'none, url("/src/assets/vendor/sm2/image/icomoon/entypo-25px-000000/SVG/volume.svg")',
+    backgroundRepeat: 'no-repeat',
+    lineHeight: '10em',
+    imageRendering: '-moz-crisp-edges'
+
+  }
+  
+};
+
+PlayVolume.propTypes = {
+  sound: React.PropTypes.object.isRequired
+};
 
 module.exports = PlayVolume;

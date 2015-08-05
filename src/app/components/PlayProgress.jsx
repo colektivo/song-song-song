@@ -1,21 +1,20 @@
 var React = require('react');
+var Radium = require('radium');
 var utils= require('../utilities/helpers');
 var ProgressTrack = require('./ProgressTrack');
 var PlayPosition = require('./PlayPosition');
 var PlayDuration = require('./PlayDuration');
-var hasSound = require('./HasSoundMixin');
 
-var PlayProgress = React.createClass({
+@Radium
+class PlayProgress extends React.Component {
 
-  mixins : [hasSound],
-
-  render: function(){
+  render(){
     return (
       /*jshint ignore:start */
-      <div className="sm2-progress">
-        <div className="sm2-row">
+      <div>
+        <div style={styles.row}>
           <PlayPosition sound={this.props.sound} />
-          <div className="sm2-progress-bd">
+          <div style={styles.progressSpacing} >
             <ProgressTrack 
                 grabbingOn={this.props.grabbingOn} 
                 grabbingOff={this.props.grabbingOff} 
@@ -27,6 +26,24 @@ var PlayProgress = React.createClass({
       /*jshint ignore:end */
     );
   }
-});
+
+}
+
+var styles = {
+  row: {
+    display: 'table-row'
+  },
+  progress: {
+  },
+  progressSpacing: {
+    /* spacing between progress track/ball and time (position) */
+    padding: '0px 0.8em'
+  }
+};
+
+PlayProgress.propTypes = {
+  sound: React.PropTypes.object.isRequired
+};
+
 
 module.exports = PlayProgress;

@@ -1,8 +1,10 @@
 var React = require('react');
+var Radium = require('radium');
 var utils= require('../utilities/helpers');
 
-var VolumeControl = React.createClass({
-  render: function(){
+@Radium
+class VolumeControl extends React.Component {
+  render(){
     var volumeControlStyle = {};
 
     if (this.props.volume.backgroundSize) {
@@ -14,10 +16,28 @@ var VolumeControl = React.createClass({
 
     return (
       /*jshint ignore:start */
-      <a href="#volume" className="sm2-inline-button sm2-volume-control" style={volumeControlStyle} >volume {clip}</a>
+      <a href="#volume" style={[volumeControlStyle, styles.volume ]} >volume</a>
       /*jshint ignore:end */
     );
   }
-});
+
+}
+
+var styles = {
+  volume: {
+    textDecoration: 'none',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundPosition: '42% 50%',
+    backgroundSize: '56% auto',
+    backgroundImage: 'none, url("/src/assets/vendor/sm2/image/icomoon/entypo-25px-000000/SVG/volume.svg")',
+    backgroundRepeat: 'no-repeat',
+    lineHeight: '10em',
+    imageRendering: '-moz-crisp-edges'
+  }
+};
 
 module.exports = VolumeControl;

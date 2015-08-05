@@ -1,59 +1,54 @@
 var React = require('react/addons');
+var Radium = require('radium');
 var utils= require('../utilities/helpers');
 var ProgressBar = require('./ProgressBar');
 var classNames = require('classnames');
 var hasSound = require('./HasSoundMixin');
 var Draggable = require('react-draggable2');
 
-var ProgressTrack = React.createClass({
-  
-  mixins : [hasSound],
-  
-  getInitialState: function () {
-    return {
+@Radium
+class ProgressTrack extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
       position: {
         top: 0, left: 0
       },
       activeDrags: 0
-    };
-  },
-
-  handleClick: function(e){
+    }
+  }
+  handleClick(e){
     this.setNewPosition(e);
-  },
-
-  handleDrag: function (e, ui) {
+  }
+  handleDrag(e, ui) {
     this.setNewPosition(e);
     this.setState({
       position: ui.position
     });
-  },
-
-  onStart: function() {
+  }
+  onStart() {
     this.props.grabbingOn();
     this.setState({activeDrags: ++this.state.activeDrags});
-  },
-
-  componentDidMount: function() {
+  }
+  componentDidMount() {
     this.target = React.findDOMNode(this);
-  },
-
-  componentWillUnmount: function() {
-  },
-
+  }
+  componentWillUnmount() {
+    this.target = null;
+  }
   //
   // This avoid to seek before start playing
   //
-  canSeek: function(){
+  canSeek(){
     return (
       this.props.sound && this.props.sound.duration && (
         (this.props.sound.playState != 0 && !this.props.sound.paused) || 
           this.props.sound.paused
         )
-      );
-  },
-  
-  setNewPosition: function(e){
+    );
+  }
+  setNewPosition(e){
 
     var barX, barWidth, x, newPosition;
     var clientPos = utils.getXY(e);
@@ -69,26 +64,30 @@ var ProgressTrack = React.createClass({
       // a little hackish: ensure UI updates immediately with current position, even if audio is buffering and hasn't moved there yet.
       this.props.sound._iO.whileplaying.apply(this.props.sound);
     }
-  },
-
-  onStop: function(e){
+  }
+  onStop(e){
     this.props.grabbingOff();
     this.setState({activeDrags: --this.state.activeDrags});
-  },
+  }
+  render(){
 
-  render: function(){
-
-    var classes = classNames('sm2-progress-track');
     var progressMaxLeft = 100
     var left = Math.min(progressMaxLeft, Math.max(0, (progressMaxLeft * ( utils.getSoundPosition(this.props.sound) / utils.getSoundDuration(this.props.sound))))) + '%';
-    
+    var width = Math.min(100, Math.max(0, (100 * utils.getSoundPosition(this.props.sound) / utils.getSoundDuration(this.props.sound)))) + '%';
     return (
       
       /*jshint ignore:start */
-      <div ref='progressTrack' className={classes} onClick={this.handleClick}>
-        <ProgressBar sound={this.props.sound} />
-        <Draggable bound="all box" onDrag={this.handleDrag} axis="x" zIndex={100} start={{x: left}} handle=".handle" onStart={this.onStart} onStop={this.onStop}>
-          <div className="sm2-progress-ball handle">
+      <div ref='progressTrack' style={styles.track} onClick={this.handleClick.bind(this)}>
+        <ProgressBar sound={this.props.sound} width={width} />
+        <Draggable bound="all box" 
+            onDrag={this.handleDrag.bind(this)} 
+            axis="x" 
+            zIndex={100} 
+            start={{x: left}} 
+            handle=".handle" 
+            onStart={this.onStart.bind(this)} 
+            onStop={this.onStop.bind(this)}>
+          <div className="handle" style={[styles.ball]} >
             <div className="icon-overlay"></div>
           </div>
         </Draggable>
@@ -96,6 +95,38 @@ var ProgressTrack = React.createClass({
       /*jshint ignore:end */
     );
   }
-});
+}
+
+var styles = {
+  track: {
+    cursor: 'pointer',
+    position: 'relative',
+    width: '100%',
+    height: '0.65em',
+    borderRadius: '0.65em',
+    
+  },
+  ball: {
+    /* element which follows the progres "ball" as it moves */
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: ['1em', 14, '0.9333em'],
+    height: ['1em', 14, '0.9333em'],
+    margin: ['-0.2em 0px 0px -0.5em', '-2px 0px 0px -7px', '-0.175em 0px 0px -0.466em'],
+    backgroundColor: '#fff',
+    padding: 0,
+    borderRadius: '0.65em',
+    zIndex: '1'
+  },
+  ballPlaying: {
+    cursor: ['-moz-grab', '-webkit-grab', 'grab']
+  }
+}
+
+ProgressTrack.propTypes = {
+  sound: React.PropTypes.object.isRequired
+};
+
 
 module.exports = ProgressTrack;
