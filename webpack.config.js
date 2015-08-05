@@ -45,7 +45,7 @@ module.exports = Object.keys(languages).map(function(language) {
     module: {
         loaders: [
           { test: /\.jsx?$/, 
-            exclude: /(node_modules|bower_components)/,
+            exclude: /(node_modules)/,
             loaders: ['react-hot', 'babel?optional[]=runtime&stage=0'],
             include: path.join(__dirname, 'src/app') 
           },
@@ -54,16 +54,10 @@ module.exports = Object.keys(languages).map(function(language) {
         ]
     },
     resolve: {
-      
       extensions: ['', '.js', '.jsx', '.css', '.styl'],
       resolve: {
-        root: [path.join(__dirname, "bower_components"), path.join(__dirname, "assets", "styles")]
+        root: [path.join(__dirname, "assets", "styles")]
       },
-      plugins: [
-          new webpack.ResolverPlugin(
-            new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin("bower.json", ["main"])
-          )
-      ]
     }
   };
 });
