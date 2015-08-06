@@ -1,7 +1,6 @@
 var React = require('react');
 var Radium = require('radium');
 var utils= require('../utilities/helpers');
-var hasSound = require('./HasSoundMixin');
 
 @Radium
 class Duration extends React.Component {
