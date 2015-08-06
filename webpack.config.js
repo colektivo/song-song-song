@@ -6,19 +6,12 @@ var languages = {
     "es": require("./src/locales/es.json"),
     "de": require("./src/locales/de.json")
 };
-// 'webpack-dev-server/client?http://192.168.1.122:3000',
-
-//  devtool: 'source-map',
-
-// loader: 'css-loader!stylus-loader?paths=node_modules/bootstrap-stylus/stylus/'
-//          { test: /\.css$/, loader: "style-loader!css-loader" },
 
 var isDev = process.env.NODE_ENV;
 
 // css
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var stylusLoader = ExtractTextPlugin.extract("style-loader", "css-loader!stylus-loader");
-
 
 module.exports = Object.keys(languages).map(function(language) {
   return {
@@ -63,6 +56,5 @@ module.exports = Object.keys(languages).map(function(language) {
 });
 
 module.exports.output = {
-  // EDIT: for webpack-dev-server to serve files under /some-public-path/
   publicPath: "/"
 };
