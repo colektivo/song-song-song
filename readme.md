@@ -92,7 +92,6 @@ npm start
 ### ToDo
 
 * check what to do with warnings and unsupported properties on Radium
-* make the drag work again
 * Add tests (after exploring phase)
 * Implement onError
 * Implement onLoad
