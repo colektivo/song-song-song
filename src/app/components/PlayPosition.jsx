@@ -24,8 +24,8 @@ var styles = {
     fontSize: '75%',
     lineHeight: '0.9em',
     minWidth: '2em', /* if you have sounds > 10:00 in length, make this bigger. */
-    verticalAlign: 'middle'
-    
+    verticalAlign: 'middle',
+    color: '#fff'
   }
 };
 

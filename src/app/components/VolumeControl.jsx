@@ -33,7 +33,7 @@ var styles = {
     height: '100%',
     backgroundPosition: '42% 50%',
     backgroundSize: '56% auto',
-    backgroundImage: 'none, url("/src/assets/vendor/sm2/image/icomoon/entypo-25px-000000/SVG/volume.svg")',
+    backgroundImage: 'none, url("/src/assets/vendor/sm2/image/icomoon/entypo-25px-ffffff/SVG/volume.svg")',
     backgroundRepeat: 'no-repeat',
     lineHeight: '10em',
     imageRendering: '-moz-crisp-edges'
