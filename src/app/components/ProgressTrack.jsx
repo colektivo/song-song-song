@@ -3,8 +3,7 @@ var Radium = require('radium');
 var utils= require('../utilities/helpers');
 var ProgressBar = require('./ProgressBar');
 var classNames = require('classnames');
-var hasSound = require('./HasSoundMixin');
-var Draggable = require('react-draggable2');
+var Draggable = require('react-draggable');
 
 @Radium
 class ProgressTrack extends React.Component {
@@ -79,7 +78,7 @@ class ProgressTrack extends React.Component {
       /*jshint ignore:start */
       <div ref='progressTrack' style={styles.track} onClick={this.handleClick.bind(this)}>
         <ProgressBar sound={this.props.sound} width={width} />
-        <Draggable bound="all box" 
+        <Draggable bound="parent" 
             onDrag={this.handleDrag.bind(this)} 
             axis="x" 
             zIndex={100} 
@@ -87,7 +86,7 @@ class ProgressTrack extends React.Component {
             handle=".handle" 
             onStart={this.onStart.bind(this)} 
             onStop={this.onStop.bind(this)}>
-          <div className="handle" style={[styles.ball]} >
+          <div className="handle" style={[styles.ball, {left: left}]} >
             <div className="icon-overlay"></div>
           </div>
         </Draggable>
@@ -109,8 +108,8 @@ var styles = {
   ball: {
     /* element which follows the progres "ball" as it moves */
     position: 'absolute',
-    top: 0,
     left: 0,
+    top: 0,
     width: ['1em', 14, '0.9333em'],
     height: ['1em', 14, '0.9333em'],
     margin: ['-0.2em 0px 0px -0.5em', '-2px 0px 0px -7px', '-0.175em 0px 0px -0.466em'],
