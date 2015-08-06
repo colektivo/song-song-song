@@ -94,6 +94,7 @@ npm start
 ### ToDo
 
 * check what to do with warnings and unsupported properties on Radium
+* make it major browsers resistent
 * Add tests (after exploring phase)
 * Implement onError
 * Implement onLoad
