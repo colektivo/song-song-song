@@ -12,8 +12,6 @@ var utils = require('../utilities/helpers');
 
 var classNames = require('classnames');
 
-
-
 @Radium
 class StandardUIPlayer extends React.Component {
   getInitialState() {
@@ -43,8 +41,8 @@ class StandardUIPlayer extends React.Component {
       <div id="mainControl" className={classes} style={styles.barUI}>
         <div id="controls" style={styles.controls}>
           <PlayButton handlePlay={this.props.handlePlay} sound={this.props.sound} />
-          <PlayInlineStatus grabbingOn={this.handleMouseDown}
-                            grabbingOff={this.handleMouseUp}
+          <PlayInlineStatus grabbingOn={this.handleMouseDown.bind(this)}
+                            grabbingOff={this.handleMouseUp.bind(this)}
                             songName={this.props.songName}
                             author={this.props.author}
                             sound={this.props.sound}
