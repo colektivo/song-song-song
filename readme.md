@@ -51,32 +51,6 @@ This is not production ready, is on exploring phase.
 
 ```
 
-### Sample?
-
-```javascript
-
-soundManager.onready(function(){
-  console.log("SoundManager ready");
-
-  var sound = soundManager.createSound({
-
-    id: 'mysong',
-    autoLoad: false,
-    autoPlay: false,
-    url: url
-  });
-
-  React.render(
-      /*jshint ignore:start */
-      <SongSongSongApp sound={sound} songName='Morir por qué?' author='No Mataras' fullWidth='true' />,
-      /*jshint ignore:end */
-      document.getElementById('app')
-  );
-  
-});
-
-```
-
 ### Usage
 
 ```
@@ -87,8 +61,6 @@ npm start
 # open http://localhost:3000/
 
 ```
-
-
 
 
 ### ToDo
