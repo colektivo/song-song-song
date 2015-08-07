@@ -93,10 +93,12 @@ npm start
 
 ### ToDo
 
+* avoid text selection when dragging volume
+* move sample app to examples
+* review directory structure
 * check what to do with warnings and unsupported properties on Radium
 * make it major browsers resistent
 * Add tests (after exploring phase)
 * Implement onError
 * Implement onLoad
 * Implement whileloading for flash player
-
