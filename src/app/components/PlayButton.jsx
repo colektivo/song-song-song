@@ -28,7 +28,10 @@ var styles = {
     minHeight: '2.8em',
     overflow: 'hidden',
     display: 'table-cell',
-    width: '1%'
+    width: '1%',
+    borderRightWidth: '0.075em',
+    borderRightStyle: 'solid',
+    borderRightColor: 'rgba(0, 0, 0, 0.1)'
   },
   
   inlineButton: {
@@ -43,7 +46,11 @@ var styles = {
     * https://developer.mozilla.org/en-US/docs/Web/CSS/image-rendering#Browser_compatibility
     */
     imageRendering: ['-moz-crisp-edges', ' -webkit-optimize-contrast', 'crisp-edges',  ],
-    msInterpolationMode: ['nearest-neighbor', 'bicubic']
+    msInterpolationMode: ['nearest-neighbor', 'bicubic'],
+    ':hover': {
+      backgroundColor: 'rgba(0,0,0,0.1)',
+      backgroundImage: ['none, none']
+    }
   },
 
   playButtonBorder: {
@@ -74,13 +81,31 @@ var styles = {
   play: {
     backgroundImage: [ 'url(/src/assets/vendor/sm2/image/icomoon/entypo-25px-ffffff/PNG/play.png)', 'none, url(/src/assets/vendor/sm2/image/icomoon/entypo-25px-ffffff/SVG/play.svg)'],
     backgroundSize: '67.5%',
-    backgroundPosition: '40% 53%'
+    backgroundPosition: '40% 53%',
+    ':hover': {
+      backgroundImage: [ 'url(/src/assets/vendor/sm2/image/icomoon/entypo-25px-ffffff/PNG/play.png)', 'none, url(/src/assets/vendor/sm2/image/icomoon/entypo-25px-ffffff/SVG/play.svg)'],
+      backgroundSize: '67.5%',
+      backgroundPosition: '40% 53%'
+    },
+    ':active': {
+      backgroundColor: 'rgba(0, 0, 0, 0.25)',
+      backgroundImage: 'none, none'
+    }
   },
 
   pause: {
     backgroundImage: ['url(/src/assets/vendor/sm2/image/icomoon/entypo-25px-ffffff/SVG/pause.svg)', 'none, url(/src/assets/vendor/sm2/image/icomoon/entypo-25px-ffffff/SVG/pause.svg)'],
     backgroundSize: '57.6%',
-    backgroundPosition: '50% 53%'
+    backgroundPosition: '50% 53%',
+    ':hover': {
+      backgroundImage: ['url(/src/assets/vendor/sm2/image/icomoon/entypo-25px-ffffff/SVG/pause.svg)', 'none, url(/src/assets/vendor/sm2/image/icomoon/entypo-25px-ffffff/SVG/pause.svg)'],
+      backgroundSize: '57.6%',
+      backgroundPosition: '50% 53%'
+    },
+    ':active': {
+      backgroundColor: 'rgba(0, 0, 0, 0.25)',
+      backgroundImage: 'none, none'
+    }
   }
 };
 
