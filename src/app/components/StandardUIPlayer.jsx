@@ -71,6 +71,7 @@ StandardUIPlayer.propTypes = {
 
 var styles = {
   barUI: {
+    backgroundColor: 'rgba(128, 128, 128, 0.54)',
     position: 'fixed',
     top: 'auto',
     bottom: 0,
