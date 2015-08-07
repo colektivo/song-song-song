@@ -194,7 +194,15 @@ var styles = {
     minHeight: '2.8em',
     overflow: 'hidden',
     display: 'table-cell',
-    width: '1%'
+    width: '1%',
+    ':hover': {
+      backgroundColor: 'rgba(0, 0, 0, 0.1)',
+      backgroundImage: 'none, none'
+    },
+    ':active': {
+      backgroundColor: 'rgba(0, 0, 0, 0.25)',
+      backgroundImage: 'none, none'
+    }
   },
   volumeBorder: {
     minWidth: '2.8em',
