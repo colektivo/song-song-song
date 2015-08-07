@@ -35,15 +35,18 @@ var styles = {
     width: '100%',
     minWidth: '100%',
     maxWidth: '100%',
-    borderRight: '0.075em solid rgba(0,0,0,0.1)',
     position: 'relative',
-    //paddingLeft: '0.75em',
-    //paddingRight: '0.75em',
     lineHeight: '100%',
     display: 'table-cell',
     minHeight: '2.8em',
     overflow: 'hidden',
-    padding: 0
+    padding: 0,
+    paddingLeft: '0.75em',
+    paddingRight: '0.75em',
+    borderRightWidth: '0.075em',
+    borderRightStyle: 'solid',
+    borderRightColor: 'rgba(0, 0, 0, 0.1)',
+    verticalAlign: 'middle'
   },
   inlineElement: {
     position: 'relative',
@@ -76,7 +79,7 @@ var styles = {
   },
   playlist: {
     position: 'relative',
-    height: '1.45em'
+    height: '1.45em',
   },
   playlistTarget: {
     /* initial render / empty case */
