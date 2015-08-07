@@ -103,7 +103,8 @@ var styles = {
     width: '100%',
     height: '0.65em',
     borderRadius: '0.65em',
-    
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    backgroundImage: 'none, none'
   },
   ball: {
     /* element which follows the progres "ball" as it moves */
