@@ -65,7 +65,6 @@ npm start
 
 ### ToDo
 
-* avoid text selection when dragging volume
 * move sample app to examples
 * review directory structure
 * check what to do with warnings and unsupported properties on Radium

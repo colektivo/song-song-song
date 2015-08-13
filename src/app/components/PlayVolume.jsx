@@ -210,6 +210,11 @@ var styles = {
     position: 'relative',
   },
   volumeShade: {
+    userSelect: 'none',
+    WebkitUserSelect: 'none',
+    MozUserSelect: 'none',
+    OuserSelect: 'none',
+    msUserSelect: 'none',
     position: 'absolute',
     top: 0,
     left: 0,
