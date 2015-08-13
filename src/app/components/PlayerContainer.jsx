@@ -1,5 +1,5 @@
 var React = require('react');
-var StandardUIPlayer = require('./StandardUIPlayer');
+var StandardUIPlayer = require('./bar-ui/StandardUIPlayer');
 var classNames = require('classnames');
 
 var PlayerContainer = React.createClass({

@@ -1,7 +1,7 @@
 var React = require('react');
 var Radium = require('radium');
 var objectAssign = require('react/lib/Object.assign');
-var utils= require('../utilities/helpers');
+var utils= require('../../utilities/helpers');
 var VolumeControl = require('./VolumeControl');
 
 @Radium

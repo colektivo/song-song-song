@@ -1,6 +1,6 @@
 var React = require('react');
 var Radium = require('radium');
-var utils= require('../utilities/helpers');
+var utils= require('../../utilities/helpers');
 
 @Radium
 class ProgressBar extends React.Component {

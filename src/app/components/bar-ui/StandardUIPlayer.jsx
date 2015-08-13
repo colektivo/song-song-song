@@ -8,7 +8,7 @@ var PlayInlineStatus = require('./PlayInlineStatus');
 var PlayVolume = require('./PlayVolume');
 var PlayList = require('./PlayList');
 var PlayProgress = require('./PlayProgress');
-var utils = require('../utilities/helpers');
+var utils = require('../../utilities/helpers');
 
 var classNames = require('classnames');
 
