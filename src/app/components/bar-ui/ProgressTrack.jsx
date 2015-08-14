@@ -2,7 +2,6 @@ var React = require('react/addons');
 var Radium = require('radium');
 var utils= require('../../utilities/helpers');
 var ProgressBar = require('./ProgressBar');
-var classNames = require('classnames');
 var Draggable = require('react-draggable');
 
 @Radium
