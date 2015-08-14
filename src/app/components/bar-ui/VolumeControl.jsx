@@ -1,6 +1,5 @@
 var React = require('react');
 var Radium = require('radium');
-var utils= require('../../utilities/helpers');
 
 @Radium
 class VolumeControl extends React.Component {
@@ -23,6 +22,8 @@ class VolumeControl extends React.Component {
 
 }
 
+var bg = require('./images/icomoon/entypo-25px-ffffff/SVG/volume.svg');
+
 var styles = {
   volume: {
     textDecoration: 'none',
@@ -33,7 +34,7 @@ var styles = {
     height: '100%',
     backgroundPosition: '42% 50%',
     backgroundSize: '56% auto',
-    backgroundImage: 'none, url(/src/assets/vendor/sm2/image/icomoon/entypo-25px-ffffff/SVG/volume.svg)',
+    backgroundImage: 'none, url('+ bg +')',
     backgroundRepeat: 'no-repeat',
     lineHeight: '10em',
     imageRendering: '-moz-crisp-edges'
