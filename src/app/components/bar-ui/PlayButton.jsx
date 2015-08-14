@@ -18,6 +18,11 @@ class PlayButton extends React.Component {
   }
 };
 
+var playBgPng = require('./images/icomoon/entypo-25px-ffffff/PNG/play.png');
+var playBgSvg = require('./images/icomoon/entypo-25px-ffffff/SVG/play.svg');
+var pauseBgPng = require('./images/icomoon/entypo-25px-ffffff/PNG/pause.png');
+var pauseBgSvg = require('./images/icomoon/entypo-25px-ffffff/SVG/pause.svg');
+
 var styles = {
 
   playWrapper: {
@@ -45,7 +50,7 @@ var styles = {
     * image-rendering seems to apply mostly to Firefox in this case. Use with caution.
     * https://developer.mozilla.org/en-US/docs/Web/CSS/image-rendering#Browser_compatibility
     */
-    imageRendering: ['-moz-crisp-edges', ' -webkit-optimize-contrast', 'crisp-edges',  ],
+    // imageRendering: ['-moz-crisp-edges', ' -webkit-optimize-contrast', 'crisp-edges'  ],
     msInterpolationMode: ['nearest-neighbor', 'bicubic'],
     ':hover': {
       backgroundColor: 'rgba(0,0,0,0.1)',
@@ -79,12 +84,12 @@ var styles = {
   },
 
   play: {
-    backgroundImage: [ 'url(/src/assets/vendor/sm2/image/icomoon/entypo-25px-ffffff/PNG/play.png)', 'none, url(/src/assets/vendor/sm2/image/icomoon/entypo-25px-ffffff/SVG/play.svg)'],
-    backgroundSize: '67.5%',
+    backgroundImage: [ 'url(' + playBgSvg + ')', 'none, url(' + playBgPng + ')'],
+    backgroundSize: '67.5% auto',
     backgroundPosition: '40% 53%',
     ':hover': {
-      backgroundImage: [ 'url(/src/assets/vendor/sm2/image/icomoon/entypo-25px-ffffff/PNG/play.png)', 'none, url(/src/assets/vendor/sm2/image/icomoon/entypo-25px-ffffff/SVG/play.svg)'],
-      backgroundSize: '67.5%',
+      backgroundImage: [ 'url(' + playBgSvg + ')', 'none, url(' + playBgPng + ')'],
+      backgroundSize: '67.5% auto',
       backgroundPosition: '40% 53%'
     },
     ':active': {
@@ -94,11 +99,11 @@ var styles = {
   },
 
   pause: {
-    backgroundImage: ['url(/src/assets/vendor/sm2/image/icomoon/entypo-25px-ffffff/SVG/pause.svg)', 'none, url(/src/assets/vendor/sm2/image/icomoon/entypo-25px-ffffff/SVG/pause.svg)'],
+    backgroundImage: ['url(' + pauseBgSvg + ')', 'none, url(' + pauseBgPng + ')'],
     backgroundSize: '57.6%',
     backgroundPosition: '50% 53%',
     ':hover': {
-      backgroundImage: ['url(/src/assets/vendor/sm2/image/icomoon/entypo-25px-ffffff/SVG/pause.svg)', 'none, url(/src/assets/vendor/sm2/image/icomoon/entypo-25px-ffffff/SVG/pause.svg)'],
+      backgroundImage: ['url(' + pauseBgSvg + ')', 'none, url(' + pauseBgPng + ')'],
       backgroundSize: '57.6%',
       backgroundPosition: '50% 53%'
     },
