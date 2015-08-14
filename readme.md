@@ -66,10 +66,11 @@ npm start
 ### ToDo
 
 * move sample app to examples
+* Implement onError
+* Implement onLoad
 * review directory structure
+* complete package.json
 * check what to do with warnings and unsupported properties on Radium
 * make it major browsers resistent
 * Add tests (after exploring phase)
-* Implement onError
-* Implement onLoad
 * Implement whileloading for flash player
