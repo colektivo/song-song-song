@@ -22,6 +22,9 @@ class ProgressBar extends React.Component {
 
 }
 
+var bg = require('./images/black-33.png');
+
+
 var styles = {
   bar: {
     height: '0.65em',
@@ -30,7 +33,7 @@ var styles = {
     left: 0,
     top: 0,
     backgroundColor: 'rgba(0,0,0,0.33)',
-    backgroundImage: ['url(/src/assets/vendor/sm2/image/black-33.png)', 'none, none']
+    backgroundImage: ['url(' + bg + ')', 'none, none']
   }
 };
 
