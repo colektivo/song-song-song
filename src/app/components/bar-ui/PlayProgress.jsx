@@ -1,6 +1,5 @@
 var React = require('react');
 var Radium = require('radium');
-var utils= require('../../utilities/helpers');
 var ProgressTrack = require('./ProgressTrack');
 var PlayPosition = require('./PlayPosition');
 var PlayDuration = require('./PlayDuration');
