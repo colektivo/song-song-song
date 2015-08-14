@@ -18,8 +18,6 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var stylusLoader = ExtractTextPlugin.extract("style-loader", "css-loader!stylus-loader");
 
 var config = Object.keys(languages).map(function(language) {
-  console.log('environment:' + env);
-  
   var currentConfig = {
     lang: language,
     target: 'web',
@@ -74,7 +72,6 @@ var config = Object.keys(languages).map(function(language) {
     }
   };
   if (env === 'production') {
-    console.log('adding production plugins');
   	currentConfig.plugins = currentConfig.plugins.concat([
       new webpack.DefinePlugin({
         "process.env": {
