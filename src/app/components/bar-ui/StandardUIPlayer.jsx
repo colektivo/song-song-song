@@ -1,23 +1,19 @@
 var React = require('react');
 var Radium = require('radium');
-
 var PlayButton = require('./PlayButton');
-var PlayerTexture = require('./PlayerTexture');
-var PlayerGradient = require('./PlayerGradient');
 var PlayInlineStatus = require('./PlayInlineStatus');
 var PlayVolume = require('./PlayVolume');
-var PlayList = require('./PlayList');
-var PlayProgress = require('./PlayProgress');
-var utils = require('../../utilities/helpers');
 
 var classNames = require('classnames');
 
 @Radium
 class StandardUIPlayer extends React.Component {
-  getInitialState() {
-    return 
-      {grabbing: false}
-    ;
+
+  constructor() {
+    super();
+    this.state = {
+      grabbing: false
+    }
   }
   handleMouseDown(e) {
     this.setState({grabbing:true});
