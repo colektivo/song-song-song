@@ -25,7 +25,7 @@ class PlayVolume extends React.Component {
   updateControl() {
     // 60% wide means 20% margin on each side.
     
-    var value, x, y, width, height, volume;
+    var x, y, width, height;
     
     x = utils.position.getOffX(this.control);
     y = utils.position.getOffY(this.control);
@@ -91,7 +91,7 @@ class PlayVolume extends React.Component {
         isMoving: false
       }));
 
-      var value, x, y, volume, width, height, backgroundSize;
+      var x, y, width, height;
       
       x = utils.position.getOffX(this.control);
       y = utils.position.getOffY(this.control);
@@ -185,6 +185,8 @@ class PlayVolume extends React.Component {
   
 }
 
+var bg = require('./images/icomoon/entypo-25px-ffffff/SVG/volume.svg');
+
 var styles = {
   volumeWrapper: {
     position: 'relative',
@@ -223,7 +225,7 @@ var styles = {
     opacity: '0.33',
     backgroundPosition: '42% 50%',
     backgroundSize: '56% auto',
-    backgroundImage: 'none, url("/src/assets/vendor/sm2/image/icomoon/entypo-25px-000000/SVG/volume.svg")',
+    backgroundImage: 'none, url('+ bg +')',
     backgroundRepeat: 'no-repeat',
     lineHeight: '10em',
     imageRendering: '-moz-crisp-edges'
