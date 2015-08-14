@@ -6,6 +6,7 @@ var React = require('react'),
 
 var url = "https://api.soundcloud.com/tracks/202637761/stream?client_id=728189eaa03c689c2bd4eaf42f410196&secret_token=s-SFJ0A";
 var PlayerContainer = require('./components/PlayerContainer');
+var soundManager = require('SoundManager2').soundManager;
 
 SongSongSongApp = React.createClass({
 
@@ -51,10 +52,12 @@ SongSongSongApp = React.createClass({
 
 soundManager.onready(function(){
 
+  var bg = require('../assets/images/inconsciente01.jpg');
+
   var rootInstance = React.render(
 
       /*jshint ignore:start */
-      <SongSongSongApp background='/src/assets/images/inconsciente01.jpg' url={url} songName='Inconsciente' author='No Mataras' fullWidth={true} flat={true} fixed={true} />,
+      <SongSongSongApp background={bg} url={url} songName='Inconsciente' author='No Mataras' fullWidth={true} flat={true} fixed={true} />,
       /*jshint ignore:end */
       document.getElementById('app')
   );
