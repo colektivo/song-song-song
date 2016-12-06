@@ -15,19 +15,20 @@ var env = process.env.NODE_ENV;
 
 // css
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var stylusLoader = ExtractTextPlugin.extract("style-loader", "css-loader!stylus-loader");
+var stylusLoader = ExtractTextPlugin.extract({
+  fallbackLoader: 'style-loader',
+  loader:         'css-loader!stylus-loader' });
 
 var config = Object.keys(languages).map(function(language) {
   var currentConfig = {
-    lang: language,
     target: 'web',
     cache: true,
     name: language,
     context: __dirname + '/src/app',
     devtool: process.env.WEBPACK_DEVTOOL || 'source-map',
-    debug: true,
     entry: [
       'webpack-dev-server/client?http://0.0.0.0:3000',
+      'react-hot-loader/patch',
       'webpack/hot/dev-server',
       path.resolve(__dirname, 'src/app/app.jsx')
     ],
@@ -39,15 +40,14 @@ var config = Object.keys(languages).map(function(language) {
     },
     plugins: [
       new I18nPlugin(languages[language]),
-      new webpack.optimize.DedupePlugin(),
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoErrorsPlugin(),
       new ExtractTextPlugin("[name].css"),
       new HtmlWebpackPlugin({
             title: 'Song player',
             filename: 'index.html',
-            template: 'index-template.html', // Load a custom template 
-            inject: 'body' // Inject all scripts into the body 
+            template: 'index-template.html', // Load a custom template
+            inject: 'body' // Inject all scripts into the body
       }),
       new StatsPlugin('stats/stats.json', {
         chunkModules: true,
@@ -56,19 +56,31 @@ var config = Object.keys(languages).map(function(language) {
     ],
     module: {
         loaders: [
-          { test: /\.jsx?$/, 
+          { test: /\.jsx?$/,
             exclude: /(node_modules)/,
-            loaders: ['react-hot', 'babel?optional[]=runtime&stage=0'],
-            include: path.join(__dirname, 'src/app')
+            loader:  'babel-loader',
+            include: path.join(__dirname, 'src/app'),
+            query:   {
+              presets: [
+                ["es2015", { loose: true, modules: false }],
+                "stage-1",
+                "react"
+              ],
+              plugins: [
+                "transform-decorators-legacy",
+                "react-hot-loader/babel"
+              ]
+            }
           },
           { test: /\.(jpe?g|png|gif|svg)$/i, loader: 'file-loader?name=images/[name].[ext]' }
         ]
     },
     resolve: {
-      extensions: ['', '.js', '.jsx', '.css', '.styl'],
-      resolve: {
-        root: [path.join(__dirname, "assets", "styles")]
-      },
+      // https://github.com/webpack/webpack/issues/3043#issuecomment-249314455
+      extensions: ['*', '.js', '.jsx', '.css', '.styl'],
+      // resolve: {
+      //   root: [path.join(__dirname, "assets", "styles")]
+      // },
     }
   };
   if (env === 'production') {

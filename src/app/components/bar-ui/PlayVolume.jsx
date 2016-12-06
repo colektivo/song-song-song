@@ -1,6 +1,5 @@
 var React = require('react');
 var Radium = require('radium');
-var objectAssign = require('react/lib/Object.assign');
 var utils= require('../../utilities/helpers');
 var VolumeControl = require('./VolumeControl');
 
@@ -86,7 +85,7 @@ class PlayVolume extends React.Component {
 
     if (e.target === this.control || e.target === this.controlShade) {
 
-      this.setState(objectAssign({
+      this.setState(Object.assign({
         isMouseDown: true,
         isMoving: false
       }));
@@ -117,7 +116,7 @@ class PlayVolume extends React.Component {
   _onMouseMove(e) {
       if(this.state.isMouseDown) {
         this.setState(
-          objectAssign({
+          Object.assign({
             isMoving: true,
           }));
         this._adjustVolume(e);
@@ -153,7 +152,7 @@ class PlayVolume extends React.Component {
     // relative position of mouse over element
     controlData.value = Math.max(0, Math.min(1, (e.clientX - controlData.x) / controlData.width));
 
-    this.setState(objectAssign({ volume: controlData }));    
+    this.setState(Object.assign({ volume: controlData }));
 
     // determine logical volume, including background margin
     pixelMargin = ((backgroundMargin/100) * controlData.width);

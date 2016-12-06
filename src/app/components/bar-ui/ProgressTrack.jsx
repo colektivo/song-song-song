@@ -1,4 +1,4 @@
-var React = require('react/addons');
+var React = require('react');
 var Radium = require('radium');
 var utils= require('../../utilities/helpers');
 var ProgressBar = require('./ProgressBar');
